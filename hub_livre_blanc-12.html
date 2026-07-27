@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G7VLNCKKW7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G7VLNCKKW7');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le problème n'est pas le message. C'est l'attention.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --orange: #FF5F00;
+    --black: #0B0B0B;
+    --dark: #141414;
+    --border: #1E1E1E;
+    --mid: #444;
+    --muted: #777;
+    --light: #EEEBE5;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #E8E8E8;
+  }
+
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--black);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(255,95,0,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.15;
+    max-width: 700px;
+    margin-bottom: 32px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--orange);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .btn-primary:hover { background: #FF7A22; }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--white); border-color: #444; }
+
+  /* STATS CARROUSEL */
+  .stats-band {
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    background: #FAF8F5;
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+  }
+
+  .stat-item {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 80px;
+    opacity: 0;
+    animation: fadeSlide 15s infinite;
+  }
+
+  .stat-item:nth-child(2) { animation-delay: 5s; }
+  .stat-item:nth-child(3) { animation-delay: 10s; }
+
+  @keyframes fadeSlide {
+    0%, 100% { opacity: 0; transform: translateY(10px); }
+    4%, 28% { opacity: 1; transform: translateY(0); }
+    33%, 99% { opacity: 0; transform: translateY(-10px); }
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 8vw, 90px);
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .stat-label {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .stat-source {
+    font-size: 10px;
+    color: var(--mid);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 72px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    max-width: 640px;
+    color: var(--black);
+  }
+
+  .section-body {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    max-width: 560px;
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: var(--orange);
+    margin: 32px 0;
+  }
+
+  /* RESSOURCES GRID */
+  .ressources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: #DDD;
+    border: 1px solid #DDD;
+    margin-top: 56px;
+  }
+
+  .ressource-card {
+    background: #FAFAFA;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: background 0.2s;
+  }
+
+  .ressource-card:hover { background: #F0EDE8; }
+
+  .ressource-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-transform: uppercase;
+  }
+
+  .ressource-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--black);
+  }
+
+  .ressource-desc {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .ressource-link {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--orange);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .ressource-link:hover { gap: 10px; }
+
+  /* À PROPOS */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+    margin-top: 36px;
+  }
+
+  .about-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--light);
+    border-left: 2px solid var(--orange);
+    padding-left: 28px;
+    margin-bottom: 32px;
+  }
+
+  .about-text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .about-subhead {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+
+  .about-card {
+    background: #FFF6EE;
+    border: 1px solid #F5E3D0;
+    padding: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    border-top: 1px solid #DDD;
+    background: #FAF8F5;
+    padding: 56px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    max-width: 480px;
+    line-height: 1.2;
+  }
+
+  .contact-title span { color: var(--orange); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #DDD;
+    background: #FAF8F5;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: #999;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px 64px; }
+    .stats-band { grid-template-columns: 1fr; padding: 0 24px; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 0; }
+    .stat-item:not(:first-child) { padding-left: 0; }
+    section { padding: 64px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-section { padding: 64px 24px; flex-direction: column; align-items: flex-start; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Camille Ghestin</div>
+  <ul class="nav-links">
+    <li><a href="#ressources">Ressources</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Livre blanc · Communication interne · 2026</div>
+  <h1 class="hero-title">Le problème n'est pas le message.<br><em>C'est l'attention.</em></h1>
+  <p class="hero-sub">Une recherche terrain sur la saturation cognitive en entreprise et les nouveaux leviers pour capter l'attention des collaborateurs.</p>
+  <div class="hero-actions">
+    <a href="https://drive.google.com/uc?export=download&id=1pFf6_NureIxzq7cZiZWWFpCKDL3q6Ybc" class="btn-primary">Télécharger le livre blanc →</a>
+    <a href="#ressources" class="btn-ghost">Explorer les ressources</a>
+  </div>
+</div>
+
+<!-- STATS CARROUSEL -->
+<div class="stats-band">
+  <div class="stat-item">
+    <div class="stat-number">75%</div>
+    <div class="stat-label">des collaborateurs ne lisent pas vraiment les contenus internes</div>
+    <div class="stat-source">Enquête terrain, 2026</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">23 min</div>
+    <div class="stat-label">pour retrouver sa concentration après une interruption</div>
+    <div class="stat-source">Gloria Mark, UC Irvine</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">40%</div>
+    <div class="stat-label">des organisations ont une stratégie d'écoute des collaborateurs</div>
+    <div class="stat-source">Gallagher, State of the Sector 2024/25</div>
+  </div>
+</div>
+
+<!-- RESSOURCES -->
+<section id="ressources">
+  <div class="section-eyebrow">Ressources</div>
+  <h2 class="section-title">Tout ce que vous cherchez est ici.</h2>
+  <p class="section-body">Le livre blanc et le module e-learning, deux formats pour explorer le même sujet, selon votre disponibilité et votre mode d'apprentissage.</p>
+
+  <div class="ressources-grid">
+
+    <div class="ressource-card">
+      <div class="ressource-tag">Livre blanc</div>
+      <div class="ressource-title">Le problème n'est pas le message.<br>C'est l'attention.</div>
+      <div class="ressource-desc">Recherche terrain auprès de 27 collaborateurs et 3 experts. Analyse des mécanismes de saturation cognitive et recommandations concrètes pour les équipes communication et RH.</div>
+      <a href="https://drive.google.com/uc?export=download&id=1pFf6_NureIxzq7cZiZWWFpCKDL3q6Ybc" class="ressource-link">Télécharger le PDF →</a>
+    </div>
+
+    <div class="ressource-card">
+      <div class="ressource-tag">E-learning</div>
+      <div class="ressource-title">Testez vos connaissances sur l'attention en entreprise.</div>
+      <div class="ressource-desc">10 questions pour mesurer ce que vous savez vraiment sur la saturation cognitive, les interruptions et les formats adaptés. Résultats immédiats, sources vérifiées.</div>
+      <span class="ressource-link" style="color:#AAAAAA; cursor:default;">Prochainement disponible</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER LINE -->
+<div style="border-top: 1px solid #E8E8E8; margin: 0 48px;"></div>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="section-eyebrow">À propos</div>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="about-subhead">Mon parcours</div>
+      <p class="about-text">Je m'appelle Camille Ghestin, étudiante en Master Communication & Marketing Digital à ESP Paris. Au fil de 5 années d'études, j'ai découvert différents domaines, relations presse, événementiel, influence, production de contenus, marketing digital, à travers des expériences professionnelles chez France Télévisions, en agence de communication, puis aujourd'hui en alternance chez AXA France.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-subhead">La recherche</div>
+      <p class="about-text">Ce livre blanc est né d'une observation de terrain : en entreprise, plus on communique, moins on est entendu.<br>Pas par manque de qualité. Par saturation.</p>
+      <p class="about-text">27 collaborateurs interrogés, 3 experts interviewés, plusieurs mois de recherche. L'objectif : comprendre le problème avant de proposer des solutions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <h2 class="contact-title">Une question ?<br>Un projet ?<br><span>Parlons-en.</span></h2>
+  <a href="mailto:camille.ghestin02@gmail.com" class="btn-primary">Me contacter →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Camille Ghestin, Tous droits réservés</p>
+  <p>Communication & Marketing Digital · ESP Paris</p>
+</footer>
+
+</body>
+</html>
